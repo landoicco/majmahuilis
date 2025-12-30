@@ -2,6 +2,7 @@ import pygame
 import sys
 
 from object_renderer import *
+from object_handler import *
 from sprite_object import *
 from settings import *
 from raycasting import *
@@ -23,12 +24,12 @@ class Game:
         self.player = Player(self)
         self.object_renderer = ObjectRenderer(self)
         self.raycasting = RayCasting(self)
-        self.static_sprite = SpriteObject(self)
+        self.object_handler = ObjectHandler(self)
 
     def update(self):
         self.player.update()
         self.raycasting.update()
-        self.static_sprite.update()
+        self.object_handler.update()
         pygame.display.flip()
         self.delta_time = self.clock.tick(FPS)
         pygame.display.set_caption(f"{self.clock.get_fps():.1f}")
