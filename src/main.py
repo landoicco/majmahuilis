@@ -48,7 +48,7 @@ class Game:
     def draw(self):
         self.object_renderer.draw()
         self.weapon.draw()
-        # draw_plain_map()
+        # self.draw_plain_map()
 
     def check_events(self):
         for event in pygame.event.get():
