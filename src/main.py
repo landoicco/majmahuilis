@@ -5,6 +5,7 @@ from object_renderer import *
 from object_handler import *
 from sprite_object import *
 from settings import *
+from weapon import *
 from raycasting import *
 from player import *
 from map import *
@@ -25,20 +26,27 @@ class Game:
         self.object_renderer = ObjectRenderer(self)
         self.raycasting = RayCasting(self)
         self.object_handler = ObjectHandler(self)
+        self.weapon = Weapon(self)
 
     def update(self):
         self.player.update()
         self.raycasting.update()
         self.object_handler.update()
+        self.weapon.update()
         pygame.display.flip()
         self.delta_time = self.clock.tick(FPS)
         pygame.display.set_caption(f"{self.clock.get_fps():.1f}")
 
+    # Debugging tool
+    def draw_plain_map(self):
+        self.screen.fill("black")
+        self.map.draw()
+        self.player.draw()
+
     def draw(self):
-        # self.screen.fill("black")
         self.object_renderer.draw()
-        # self.map.draw()
-        # self.player.draw()
+        self.weapon.draw()
+        # draw_plain_map()
 
     def check_events(self):
         for event in pygame.event.get():
@@ -47,6 +55,7 @@ class Game:
             ):
                 pygame.quit()
                 sys.exit()
+            self.player.single_fire_event(event)
 
     def run(self):
         while True:
