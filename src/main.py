@@ -6,6 +6,7 @@ from object_handler import *
 from sprite_object import *
 from settings import *
 from weapon import *
+from sound import *
 from raycasting import *
 from player import *
 from map import *
@@ -27,6 +28,7 @@ class Game:
         self.raycasting = RayCasting(self)
         self.object_handler = ObjectHandler(self)
         self.weapon = Weapon(self)
+        self.sound = Sound(self)
 
     def update(self):
         self.player.update()
