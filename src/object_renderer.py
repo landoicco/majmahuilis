@@ -11,10 +11,27 @@ class ObjectRenderer:
             "resources/textures/sky.png", (WIDTH, HALF_HEIGHT)
         )
         self.sky_offset = 0
+        self.blood_screen = self.get_texture("resources/textures/blood_screen.png", RES)
+        self.game_over_image = self.get_texture("resources/textures/game_over.png", RES)
 
     def draw(self):
         self.draw_background()
         self.render_game_objects()
+        self.draw_player_health()
+
+    def game_over(self):
+        self.screen.blit(self.game_over_image, (0, 0))
+
+    # TODO: Improve how health looks on screen
+    def draw_player_health(self):
+        health = str(self.game.player.health)
+        font = pygame.font.Font(None, 36)
+        text_surface = font.render(health, True, (255, 255, 255))
+        # Draw text on screen
+        self.screen.blit(text_surface, (100, 100))
+
+    def player_damage(self):
+        self.screen.blit(self.blood_screen, (0, 0))
 
     def draw_background(self):
         self.sky_offset = (self.sky_offset + 4.0 * self.game.player.rel) % WIDTH
