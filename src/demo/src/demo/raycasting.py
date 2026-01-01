@@ -1,7 +1,7 @@
 import pygame
 import math
 
-from settings import *
+from .settings import *
 
 
 class RayCasting:

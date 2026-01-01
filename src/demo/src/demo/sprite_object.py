@@ -2,7 +2,7 @@ import pygame
 import os
 from collections import deque
 
-from settings import *
+from .settings import *
 
 
 class SpriteObject:
