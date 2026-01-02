@@ -2,14 +2,12 @@ import pygame
 import os
 from collections import deque
 
-# from .settings import *
-
 
 class SpriteObject:
     def __init__(
         self,
         game,
-        path="resources/sprites/static_sprites/candelebra.png",
+        path,
         pos=(10.5, 4.5),
         scale=0.5,
         shift=0.27,
@@ -80,7 +78,7 @@ class AnimatedSprite(SpriteObject):
     def __init__(
         self,
         game,
-        path="resources/sprites/animated_sprites/green_light/0.png",
+        path,
         pos=(11.5, 3.5),
         scale=0.8,
         shift=0.15,

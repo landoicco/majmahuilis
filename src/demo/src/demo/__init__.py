@@ -11,7 +11,6 @@ from .map import *
 from .npc import *
 from .object_handler import *
 from .object_renderer import *
-from .player import *
 from .settings import *
 from .sound import *
 
@@ -21,6 +20,5 @@ __all__ = [
     "Map",
     "NPC",
     "ObjectRenderer",
-    "Player",
     "Sound",
 ]

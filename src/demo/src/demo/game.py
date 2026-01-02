@@ -8,10 +8,12 @@ from engine.pathfinding import *
 from engine.weapon import *
 from .sound import *
 from engine.raycasting import *
-from .player import *
+from engine.player import *
 from .map import *
 
 from . import settings
+
+weapon_path = "resources/sprites/weapon/shotgun/0.png"
 
 
 class Game:
@@ -33,7 +35,7 @@ class Game:
         self.object_renderer = ObjectRenderer(self)
         self.raycasting = RayCasting(self)
         self.object_handler = ObjectHandler(self)
-        self.weapon = Weapon(self)
+        self.weapon = Weapon(self, weapon_path)
         self.sound = Sound(self)
         self.pathfinding = PathFinding(self)
 

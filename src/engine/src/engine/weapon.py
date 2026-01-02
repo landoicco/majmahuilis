@@ -5,7 +5,7 @@ class Weapon(AnimatedSprite):
     def __init__(
         self,
         game,
-        path="resources/sprites/weapon/shotgun/0.png",
+        path,
         scale=0.4,
         animation_time=90,
     ):

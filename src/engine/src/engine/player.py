@@ -1,12 +1,16 @@
 import pygame
 import math
 
-from .settings import *
+# from .settings import *
 
 
 class Player:
     def __init__(self, game):
         self.game = game
+
+        # Make settings available on all file
+        globals().update(game.settings)
+
         self.x, self.y = PLAYER_POS
         self.angle = PLAYER_ANGLE
         self.shot = False

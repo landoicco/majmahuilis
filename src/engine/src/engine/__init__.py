@@ -9,5 +9,6 @@ __author__ = "Lando Icaza C."
 from .pathfinding import *
 from .raycasting import *
 from .weapon import *
+from .player import *
 
-__all__ = ["PathFinding", "RayCasting", "Weapon"]
+__all__ = ["PathFinding", "RayCasting", "Weapon", "Player"]
