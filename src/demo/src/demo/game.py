@@ -3,14 +3,15 @@ import sys
 
 from .object_renderer import *
 from .object_handler import *
-from .sprite_object import *
+from engine.sprite_object import *
 from engine.pathfinding import *
-from .settings import *
-from .weapon import *
+from engine.weapon import *
 from .sound import *
-from .raycasting import *
+from engine.raycasting import *
 from .player import *
 from .map import *
+
+from . import settings
 
 
 class Game:
@@ -22,6 +23,7 @@ class Game:
         self.delta_time = 1
         self.global_trigger = False
         self.global_event = pygame.USEREVENT + 0
+        self.settings = vars(settings)  # Store settings as a dictionary
         pygame.time.set_timer(self.global_event, 40)
         self.new_game()
 

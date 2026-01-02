@@ -1,4 +1,4 @@
-from .sprite_object import *
+from engine.sprite_object import *
 from .npc import *
 
 

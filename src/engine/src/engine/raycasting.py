@@ -1,8 +1,6 @@
 import pygame
 import math
 
-from .settings import *
-
 
 class RayCasting:
     def __init__(self, game):
@@ -10,6 +8,9 @@ class RayCasting:
         self.ray_casting_result = []
         self.objects_to_render = []
         self.textures = self.game.object_renderer.wall_textures
+
+        # Make settings available on all file
+        globals().update(game.settings)
 
     def get_objects_to_render(self):
         self.objects_to_render = []

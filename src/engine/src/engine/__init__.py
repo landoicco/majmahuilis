@@ -7,5 +7,7 @@ __version__ = "1.0.0"
 __author__ = "Lando Icaza C."
 
 from .pathfinding import *
+from .raycasting import *
+from .weapon import *
 
-__all__ = ["PathFinding"]
+__all__ = ["PathFinding", "RayCasting", "Weapon"]

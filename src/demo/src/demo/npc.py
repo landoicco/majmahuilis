@@ -1,6 +1,9 @@
+import math
+
 from random import randint, random, choice
 
-from .sprite_object import *
+from engine.sprite_object import *
+from .settings import *
 
 
 class NPC(AnimatedSprite):

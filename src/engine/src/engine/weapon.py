@@ -12,6 +12,10 @@ class Weapon(AnimatedSprite):
         super().__init__(
             game=game, path=path, scale=scale, animation_time=animation_time
         )
+
+        # Make settings available on all file
+        globals().update(game.settings)
+
         self.images = deque(
             [
                 pygame.transform.smoothscale(

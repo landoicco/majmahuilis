@@ -2,7 +2,7 @@ import pygame
 import os
 from collections import deque
 
-from .settings import *
+# from .settings import *
 
 
 class SpriteObject:
@@ -32,6 +32,9 @@ class SpriteObject:
         self.sprite_half_width = 0
         self.SPRITE_SCALE = scale
         self.SPRITE_HEIGHT_SHIFT = shift
+
+        # Make settings available on all file
+        globals().update(game.settings)
 
     def get_sprite_projection(self):
         proj = SCREEN_DIST / self.norm_dist * self.SPRITE_SCALE
