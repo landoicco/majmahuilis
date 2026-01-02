@@ -1,7 +1,7 @@
 import pygame
 import sys
 
-from .object_renderer import *
+from engine.object_renderer import *
 from .object_handler import *
 from engine.sprite_object import *
 from engine.pathfinding import *
@@ -10,8 +10,10 @@ from .sound import *
 from engine.raycasting import *
 from engine.player import *
 from .map import *
+from .texture import *
 
 from . import settings
+from . import texture
 
 weapon_path = "resources/sprites/weapon/shotgun/0.png"
 
@@ -26,6 +28,7 @@ class Game:
         self.global_trigger = False
         self.global_event = pygame.USEREVENT + 0
         self.settings = vars(settings)  # Store settings as a dictionary
+        self.texture = texture
         pygame.time.set_timer(self.global_event, 40)
         self.new_game()
 

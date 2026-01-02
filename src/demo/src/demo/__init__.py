@@ -10,7 +10,6 @@ from .game import *
 from .map import *
 from .npc import *
 from .object_handler import *
-from .object_renderer import *
 from .settings import *
 from .sound import *
 
@@ -19,6 +18,5 @@ __all__ = [
     "mini_map",
     "Map",
     "NPC",
-    "ObjectRenderer",
     "Sound",
 ]
