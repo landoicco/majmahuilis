@@ -1,17 +1,21 @@
-from sprite_object import *
+from .sprite_object import *
 
 
 class Weapon(AnimatedSprite):
     def __init__(
         self,
         game,
-        path="resources/sprites/weapon/shotgun/0.png",
+        path,
         scale=0.4,
         animation_time=90,
     ):
         super().__init__(
             game=game, path=path, scale=scale, animation_time=animation_time
         )
+
+        # Make settings available on all file
+        globals().update(game.settings)
+
         self.images = deque(
             [
                 pygame.transform.smoothscale(

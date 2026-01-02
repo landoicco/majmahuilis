@@ -9,6 +9,7 @@ authors = [
 ]
 
 dependencies = [
+    "demo",
     "pygame>=2.6.1",
 ]
 
@@ -16,3 +17,12 @@ dependencies = [
 dev = [
     "ruff>=0.14.10",
 ]
+
+[tool.uv.workspace]
+members = [
+    "src/engine",
+    "src/demo",
+]
+
+[tool.uv.sources]
+demo = { workspace = true }
