@@ -2,26 +2,26 @@ import math
 
 from random import randint, random, choice
 
-from engine.sprite_object import *
-from .settings import *
+from .sprite_object import *
+# from .settings import *
 
 
 class NPC(AnimatedSprite):
     def __init__(
         self,
         game,
-        path="resources/sprites/npc/bmonkey/0.png",
+        paths,
         pos=(10.5, 5.5),
         scale=0.6,
         shift=0.38,
         animation_time=180,
     ):
-        super().__init__(game, path, pos, scale, shift, animation_time)
-        self.attack_images = self.get_images(self.path + "/attack")
-        self.death_images = self.get_images(self.path + "/death")
-        self.idle_images = self.get_images(self.path + "/idle")
-        self.pain_images = self.get_images(self.path + "/pain")
-        self.walk_images = self.get_images(self.path + "/walk")
+        super().__init__(game, paths["base"], pos, scale, shift, animation_time)
+        self.attack_images = self.get_images(paths["attack"])
+        self.death_images = self.get_images(paths["death"])
+        self.idle_images = self.get_images(paths["idle"])
+        self.pain_images = self.get_images(paths["pain"])
+        self.walk_images = self.get_images(paths["walk"])
 
         self.attack_dist = randint(3, 6)
         self.speed = 0.03
@@ -34,6 +34,9 @@ class NPC(AnimatedSprite):
         self.ray_cast_value = False
         self.frame_counter = 0
         self.player_search_trigger = False
+
+        # Make settings available on all file
+        globals().update(game.settings)
 
     def update(self):
         self.check_animation_time()

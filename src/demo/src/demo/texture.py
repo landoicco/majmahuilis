@@ -8,3 +8,16 @@ WALL_TEXTURES = {
     4: "resources/textures/4.png",
     5: "resources/textures/5.png",
 }
+
+# Enemies
+
+NPC_PATH = "resources/sprites/npc/"
+
+BMONKEY = {
+    "base": NPC_PATH + "bmonkey/0.png",
+    "attack": NPC_PATH + "bmonkey/attack",
+    "death": NPC_PATH + "bmonkey/death",
+    "idle": NPC_PATH + "bmonkey/idle",
+    "pain": NPC_PATH + "bmonkey/pain",
+    "walk": NPC_PATH + "bmonkey/walk",
+}

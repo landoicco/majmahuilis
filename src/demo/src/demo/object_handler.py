@@ -1,5 +1,6 @@
 from engine.sprite_object import *
-from .npc import *
+from engine.npc import *
+from .texture import *
 
 
 class ObjectHandler:
@@ -25,8 +26,8 @@ class ObjectHandler:
         )
 
         # NPC map
-        add_npc(NPC(game))
-        add_npc(NPC(game, pos=(11.5, 4.5)))
+        add_npc(NPC(game, paths=BMONKEY))
+        add_npc(NPC(game, paths=BMONKEY, pos=(11.5, 4.5)))
 
     def update(self):
         self.npc_positions = {npc.map_pos for npc in self.npc_list if npc.alive}

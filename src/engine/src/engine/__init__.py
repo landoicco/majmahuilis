@@ -10,5 +10,6 @@ from .pathfinding import *
 from .raycasting import *
 from .weapon import *
 from .player import *
+from .npc import *
 
-__all__ = ["PathFinding", "RayCasting", "Weapon", "Player"]
+__all__ = ["PathFinding", "RayCasting", "Weapon", "Player", "NPC"]

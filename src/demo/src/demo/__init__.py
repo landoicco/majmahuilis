@@ -8,7 +8,6 @@ __author__ = "Lando Icaza C."
 
 from .game import *
 from .map import *
-from .npc import *
 from .object_handler import *
 from .settings import *
 from .sound import *
@@ -17,6 +16,5 @@ __all__ = [
     "Game",
     "mini_map",
     "Map",
-    "NPC",
     "Sound",
 ]
