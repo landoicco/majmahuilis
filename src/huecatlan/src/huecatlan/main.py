@@ -25,6 +25,41 @@ class Game(ShowBase):
         self.capture_mouse()
         self.setup_controls()
 
+        taskMgr.add(self.update, "update")
+
+    def update(self, task):
+        if self.camera_swing_activated:
+            # Delta time
+            dt = globalClock.getDt()
+
+            md = self.win.getPointer(0)
+            mouse_x = md.getX()
+            mouse_y = md.getY()
+
+            mouse_change_x = mouse_x - self.lastMouseX
+            mouse_change_y = mouse_y - self.lastMouseY
+
+            self.camera_swing_factor = 1
+
+            current_h = self.camera.getH()
+            current_p = self.camera.getP()
+
+            self.camera.setHpr(
+                current_h - mouse_change_x * dt * self.camera_swing_factor,
+                min(
+                    90,
+                    max(
+                        -90, current_p - mouse_change_y * dt * self.camera_swing_factor
+                    ),
+                ),
+                0,
+            )
+
+            self.lastMouseX = mouse_x
+            self.lastMouseY = mouse_y
+
+        return task.cont
+
     def setup_controls(self):
         self.accept("escape", self.release_mouse)
         self.accept("mouse1", self.capture_mouse)
@@ -50,12 +85,18 @@ class Game(ShowBase):
         # girl = girl.reparentTo(render)
 
     def capture_mouse(self):
+        self.camera_swing_activated = True
+        md = self.win.getPointer(0)
+        self.lastMouseX = md.getX()
+        self.lastMouseY = md.getY()
+
         properties = WindowProperties()
         properties.setCursorHidden(True)
         properties.setMouseMode(WindowProperties.M_relative)
         self.win.requestProperties(properties)
 
     def release_mouse(self):
+        self.camera_swing_activated = False
         properties = WindowProperties()
         properties.setCursorHidden(False)
         properties.setMouseMode(WindowProperties.M_absolute)
