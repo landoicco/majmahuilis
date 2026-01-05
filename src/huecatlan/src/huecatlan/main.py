@@ -1,3 +1,5 @@
+from math import pi, sin, cos
+
 from direct.gui.OnscreenImage import OnscreenImage
 from direct.showbase.ShowBase import ShowBase
 from panda3d.core import (
@@ -10,6 +12,10 @@ from panda3d.core import (
 
 
 loadPrcFile("settings.prc")
+
+
+def deg_to_rad(degrees):
+    return degrees * (pi / 180.0)
 
 
 class Game(ShowBase):
@@ -32,6 +38,35 @@ class Game(ShowBase):
             # Delta time
             dt = globalClock.getDt()
 
+            player_move_speed = 10
+
+            x_movement = 0
+            y_movement = 0
+            z_movement = 0
+
+            if self.keymap["forward"]:
+                x_movement -= dt * player_move_speed * sin(deg_to_rad(camera.getH()))
+                y_movement += dt * player_move_speed * cos(deg_to_rad(camera.getH()))
+            if self.keymap["backward"]:
+                x_movement += dt * player_move_speed * sin(deg_to_rad(camera.getH()))
+                y_movement -= dt * player_move_speed * cos(deg_to_rad(camera.getH()))
+            if self.keymap["left"]:
+                x_movement -= dt * player_move_speed * cos(deg_to_rad(camera.getH()))
+                y_movement -= dt * player_move_speed * sin(deg_to_rad(camera.getH()))
+            if self.keymap["right"]:
+                x_movement += dt * player_move_speed * cos(deg_to_rad(camera.getH()))
+                y_movement += dt * player_move_speed * sin(deg_to_rad(camera.getH()))
+            if self.keymap["up"]:
+                z_movement += dt * player_move_speed
+            if self.keymap["down"]:
+                z_movement -= dt * player_move_speed
+
+            self.camera.setPos(
+                camera.getX() + x_movement,
+                camera.getY() + y_movement,
+                camera.getZ() + z_movement,
+            )
+
             md = self.win.getPointer(0)
             mouse_x = md.getX()
             mouse_y = md.getY()
@@ -39,7 +74,7 @@ class Game(ShowBase):
             mouse_change_x = mouse_x - self.lastMouseX
             mouse_change_y = mouse_y - self.lastMouseY
 
-            self.camera_swing_factor = 1
+            self.camera_swing_factor = 10
 
             current_h = self.camera.getH()
             current_p = self.camera.getP()
@@ -61,8 +96,32 @@ class Game(ShowBase):
         return task.cont
 
     def setup_controls(self):
+        self.keymap = {
+            "forward": False,
+            "backward": False,
+            "left": False,
+            "right": False,
+            "up": False,
+            "down": False,
+        }
         self.accept("escape", self.release_mouse)
         self.accept("mouse1", self.capture_mouse)
+
+        self.accept("w", self.update_keymap, ["forward", True])
+        self.accept("w-up", self.update_keymap, ["forward", False])
+        self.accept("a", self.update_keymap, ["left", True])
+        self.accept("a-up", self.update_keymap, ["left", False])
+        self.accept("s", self.update_keymap, ["backward", True])
+        self.accept("s-up", self.update_keymap, ["backward", False])
+        self.accept("d", self.update_keymap, ["right", True])
+        self.accept("d-up", self.update_keymap, ["right", False])
+        self.accept("space", self.update_keymap, ["up", True])
+        self.accept("space-up", self.update_keymap, ["up", False])
+        self.accept("lshift", self.update_keymap, ["down", True])
+        self.accept("lshift-up", self.update_keymap, ["down", False])
+
+    def update_keymap(self, key, value):
+        self.keymap[key] = value
 
     def load_models(self):
         self.grass_block = loader.loadModel("resources/grass-block.glb")
