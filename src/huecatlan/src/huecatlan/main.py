@@ -1,5 +1,12 @@
+from direct.gui.OnscreenImage import OnscreenImage
 from direct.showbase.ShowBase import ShowBase
-from panda3d.core import loadPrcFile, DirectionalLight, AmbientLight
+from panda3d.core import (
+    loadPrcFile,
+    DirectionalLight,
+    AmbientLight,
+    TransparencyAttrib,
+    WindowProperties,
+)
 
 
 loadPrcFile("settings.prc")
@@ -14,6 +21,13 @@ class Game(ShowBase):
         self.set_lights()
         self.generate_terrain()
         self.set_camera()
+        self.set_skybox()
+        self.capture_mouse()
+        self.setup_controls()
+
+    def setup_controls(self):
+        self.accept("escape", self.release_mouse)
+        self.accept("mouse1", self.capture_mouse)
 
     def load_models(self):
         self.grass_block = loader.loadModel("resources/grass-block.glb")
@@ -35,6 +49,18 @@ class Game(ShowBase):
 
         # girl = girl.reparentTo(render)
 
+    def capture_mouse(self):
+        properties = WindowProperties()
+        properties.setCursorHidden(True)
+        properties.setMouseMode(WindowProperties.M_relative)
+        self.win.requestProperties(properties)
+
+    def release_mouse(self):
+        properties = WindowProperties()
+        properties.setCursorHidden(False)
+        properties.setMouseMode(WindowProperties.M_absolute)
+        self.win.requestProperties(properties)
+
     def set_lights(self):
         main_light = DirectionalLight("main light")
         main_light_node_path = render.attachNewNode(main_light)
@@ -49,6 +75,19 @@ class Game(ShowBase):
     def set_camera(self):
         self.disableMouse()
         self.camera.setPos(0, 0, 3)
+
+        crosshairs = OnscreenImage(
+            image="resources/crosshairs.png", pos=(0, 0, 0), scale=0.05
+        )
+        crosshairs.setTransparency(TransparencyAttrib.MAlpha)
+
+    def set_skybox(self):
+        skybox = loader.loadModel("resources/skybox/skybox.egg")
+        skybox.setScale(500)
+        skybox.setBin("background", 1)
+        skybox.setDepthWrite(0)
+        skybox.setLightOff()
+        skybox.reparentTo(render)
 
     def generate_terrain(self):
         for z in range(10):
