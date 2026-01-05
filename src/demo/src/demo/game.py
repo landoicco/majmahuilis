@@ -1,16 +1,19 @@
 import pygame
 import sys
 
-from engine.object_renderer import *
-from .object_handler import *
-from engine.sprite_object import *
-from engine.pathfinding import *
-from engine.weapon import *
+# Engine
+from engine.util.object_renderer import *
+from engine.util.pathfinding import *
+from engine.util.raycasting import *
+from engine.objects.sprite_object import *
+from engine.objects.weapon import *
+from engine.actors.player import *
+
+# Customs
 from .sound import *
-from engine.raycasting import *
-from engine.player import *
 from .map import *
 from .texture import *
+from .object_handler import *
 
 from . import settings
 from . import texture

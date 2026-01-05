@@ -1,5 +1,8 @@
-from engine.sprite_object import *
-from engine.npc import *
+# From engine
+from engine.objects.sprite_object import *
+from engine.actors.npc import *
+
+# Custom
 from .texture import *
 
 
