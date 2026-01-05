@@ -16,3 +16,8 @@ dependencies = [
 dev = [
     "ruff>=0.14.10",
 ]
+
+[tool.uv.workspace]
+members = [
+    "src/huecatlan",
+]
