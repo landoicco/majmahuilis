@@ -1,0 +1,20 @@
+"""
+Demo
+Specific game code
+"""
+
+__version__ = "1.0.0"
+__author__ = "Lando Icaza C."
+
+from .game import *
+from .map import *
+from .object_handler import *
+from .settings import *
+from .sound import *
+
+__all__ = [
+    "Game",
+    "mini_map",
+    "Map",
+    "Sound",
+]

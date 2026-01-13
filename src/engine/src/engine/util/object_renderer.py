@@ -1,18 +1,19 @@
 import pygame
-from settings import *
 
 
 class ObjectRenderer:
     def __init__(self, game):
         self.game = game
         self.screen = game.screen
+
+        # Make settings available on all file
+        globals().update(game.settings)
+
         self.wall_textures = self.load_wall_textures()
-        self.sky_image = self.get_texture(
-            "resources/textures/sky.png", (WIDTH, HALF_HEIGHT)
-        )
+        self.sky_image = self.get_texture(self.game.texture.SKY, (WIDTH, HALF_HEIGHT))
         self.sky_offset = 0
-        self.blood_screen = self.get_texture("resources/textures/blood_screen.png", RES)
-        self.game_over_image = self.get_texture("resources/textures/game_over.png", RES)
+        self.blood_screen = self.get_texture(self.game.texture.BLOOD_SCREEN, RES)
+        self.game_over_image = self.get_texture(self.game.texture.GAME_OVER_IMAGE, RES)
 
     def draw(self):
         self.draw_background()
@@ -49,15 +50,17 @@ class ObjectRenderer:
             self.screen.blit(image, pos)
 
     @staticmethod
-    def get_texture(path, res=(TEXTURE_SIZE, TEXTURE_SIZE)):
+    def get_texture(path, res):
         texture = pygame.image.load(path).convert_alpha()
         return pygame.transform.scale(texture, res)
 
     def load_wall_textures(self):
+        textures = self.game.texture.WALL_TEXTURES
+        res = (TEXTURE_SIZE, TEXTURE_SIZE)
         return {
-            1: self.get_texture("resources/textures/1.png"),
-            2: self.get_texture("resources/textures/2.png"),
-            3: self.get_texture("resources/textures/3.png"),
-            4: self.get_texture("resources/textures/4.png"),
-            5: self.get_texture("resources/textures/5.png"),
+            1: self.get_texture(textures[1], res),
+            2: self.get_texture(textures[2], res),
+            3: self.get_texture(textures[3], res),
+            4: self.get_texture(textures[4], res),
+            5: self.get_texture(textures[5], res),
         }

@@ -1,5 +1,9 @@
-from sprite_object import *
-from npc import *
+# From engine
+from engine.objects.sprite_object import *
+from engine.actors.npc import *
+
+# Custom
+from .texture import *
 
 
 class ObjectHandler:
@@ -15,12 +19,18 @@ class ObjectHandler:
         self.npc_positions = {}
 
         # Sprite map
-        add_sprite(SpriteObject(game))
-        add_sprite(AnimatedSprite(game))
+        add_sprite(
+            SpriteObject(game, path="resources/sprites/static_sprites/candelabra.png")
+        )
+        add_sprite(
+            AnimatedSprite(
+                game, path="resources/sprites/animated_sprites/green_light/0.png"
+            )
+        )
 
         # NPC map
-        add_npc(NPC(game))
-        add_npc(NPC(game, pos=(11.5, 4.5)))
+        add_npc(NPC(game, paths=BMONKEY))
+        add_npc(NPC(game, paths=BMONKEY, pos=(11.5, 4.5)))
 
     def update(self):
         self.npc_positions = {npc.map_pos for npc in self.npc_list if npc.alive}
